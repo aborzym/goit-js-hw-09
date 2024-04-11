@@ -10,9 +10,52 @@ body {
   background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
 }
 
 img {
   display: block;
   max-width: 100%;
+}
+
+input {
+  font-size: 1rem;
+  font-weight: 700;
+  padding-inline: 1rem;
+  padding-block: 10px;
+  text-align: center;
+  border-radius: 15px;
+}
+
+button {
+  font-size: 1rem;
+  font-weight: 700;
+  padding-inline: 1rem;
+  padding-block: 10px;
+  text-transform: uppercase;
+  border-radius: 15px;
+}
+
+.timer {
+  padding-top: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.value {
+  font-size: 3rem;
+}
+
+.label {
+  text-transform: uppercase;
 }
