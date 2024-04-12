@@ -1,18 +1,13 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import {
-  convertMs,
-  addLeadingZero,
-  //   playCountdown,
-  //   playFinalSound,
-} from './02-data';
+import { convertMs, addLeadingZero } from './02-data';
 import Notiflix from 'notiflix';
-Notiflix.Notify.init({});
-
-let finishCountdown = new Audio('../assets/win_off.mp3');
+const clockAudio = document.querySelector('#clock');
+const finishCountdownAudio = document.querySelector('#finishCountdown');
 let time;
+const input = document.querySelector('input#datetime-picker');
 const startBtn = document.querySelector('button[data-start]');
+const resetBtn = document.querySelector('button[data-reset]');
 startBtn.setAttribute('disabled', 'disabled');
 now = new Date();
 
@@ -22,7 +17,6 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    playFinalSound();
     if (selectedDates[0] < now)
       Notiflix.Notify.failure('Please choose a date in the future', {
         timeout: 4000,
@@ -58,9 +52,21 @@ startBtn.addEventListener('click', ev => {
     minutes.innerText = addLeadingZero(timeToCountdown.minutes);
     seconds.innerText = addLeadingZero(timeToCountdown.seconds);
     time -= 1000;
+    if (timeToCountdown.seconds === 5) clockAudio.play();
     if (time <= 0) {
+      finishCountdownAudio.play();
       clearInterval(interval);
       startBtn.setAttribute('disabled', 'disabled');
     }
   }, 1000);
+});
+
+resetBtn.addEventListener('click', () => {
+  clearInterval(interval);
+  days.innerText = '00';
+  hours.innerText = '00';
+  minutes.innerText = '00';
+  seconds.innerText = '00';
+  startBtn.setAttribute('disabled', 'disabled');
+  input.value = '';
 });
