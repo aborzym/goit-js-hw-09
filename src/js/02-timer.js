@@ -52,13 +52,13 @@ startBtn.addEventListener('click', ev => {
     minutes.innerText = addLeadingZero(timeToCountdown.minutes);
     seconds.innerText = addLeadingZero(timeToCountdown.seconds);
     time -= 1000;
-    if (timeToCountdown.seconds === 5) clockAudio.play();
+    if (time <= 5000 && time > 4000) clockAudio.play();
     if (time <= 0) {
       finishCountdownAudio.play();
       clearInterval(interval);
-      startBtn.setAttribute('disabled', 'disabled');
     }
   }, 1000);
+  startBtn.setAttribute('disabled', 'disabled');
 });
 
 resetBtn.addEventListener('click', () => {
