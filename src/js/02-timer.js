@@ -8,8 +8,8 @@ let time;
 const input = document.querySelector('input#datetime-picker');
 const startBtn = document.querySelector('button[data-start]');
 const resetBtn = document.querySelector('button[data-reset]');
-startBtn.setAttribute('disabled', 'disabled');
-now = new Date();
+startBtn.setAttribute('disabled', '');
+let now = new Date();
 
 const options = {
   enableTime: true,
@@ -23,7 +23,7 @@ const options = {
         fontSize: '16px',
         position: 'center-center',
         clickToClose: true,
-        useIcon: false,
+        useIcon: true,
         failure: {
           textColor: '#000',
         },
@@ -34,7 +34,8 @@ const options = {
     time = selectedDates[0] - now;
   },
 };
-const fp = flatpickr('#datetime-picker', options);
+
+flatpickr('#datetime-picker', options);
 
 const days = document.querySelector('[data-days]');
 const hours = document.querySelector('[data-hours]');
@@ -43,7 +44,7 @@ const seconds = document.querySelector('[data-seconds]');
 
 let interval;
 
-startBtn.addEventListener('click', ev => {
+startBtn.addEventListener('click', (ev) => {
   interval = setInterval(() => {
     timeToCountdown = convertMs(time);
     if (days > 99) days.innerText = timeToCountdown.days;
@@ -58,7 +59,7 @@ startBtn.addEventListener('click', ev => {
       clearInterval(interval);
     }
   }, 1000);
-  startBtn.setAttribute('disabled', 'disabled');
+  startBtn.setAttribute('disabled', '');
 });
 
 resetBtn.addEventListener('click', () => {
@@ -67,6 +68,6 @@ resetBtn.addEventListener('click', () => {
   hours.innerText = '00';
   minutes.innerText = '00';
   seconds.innerText = '00';
-  startBtn.setAttribute('disabled', 'disabled');
+  startBtn.setAttribute('disabled', '');
   input.value = '';
 });
