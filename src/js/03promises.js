@@ -1,4 +1,4 @@
-import Notiflix from 'notiflix';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
@@ -22,10 +22,10 @@ form.addEventListener('submit', (ev) => {
   for (let i = 1; i <= amount; i++) {
     createPromise(i, delay)
       .then(({ position, delay }) => {
-        Notiflix.Notify.success(`Fulfilled promise ${position} in ${delay} ms`);
+        Notify.success(`Fulfilled promise ${position} in ${delay} ms`);
       })
       .catch(({ position, delay }) => {
-        Notiflix.Notify.failure(`Rejected promise ${position} in ${delay} ms`);
+        Notify.failure(`Rejected promise ${position} in ${delay} ms`);
       });
     delay += step;
   }

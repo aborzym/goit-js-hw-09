@@ -1,7 +1,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { convertMs, addLeadingZero } from './02-data';
-import Notiflix from 'notiflix';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const clockAudio = document.querySelector('#clock');
 const finishCountdownAudio = document.querySelector('#finishCountdown');
 let time;
@@ -18,7 +18,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0] < now)
-      Notiflix.Notify.failure('Please choose a date in the future', {
+      Notify.failure('Please choose a date in the future', {
         timeout: 4000,
         fontSize: '16px',
         position: 'center-center',
@@ -46,7 +46,7 @@ let interval;
 
 startBtn.addEventListener('click', (ev) => {
   interval = setInterval(() => {
-    timeToCountdown = convertMs(time);
+    const timeToCountdown = convertMs(time);
     if (days > 99) days.innerText = timeToCountdown.days;
     else days.innerText = addLeadingZero(timeToCountdown.days);
     hours.innerText = addLeadingZero(timeToCountdown.hours);
