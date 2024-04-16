@@ -29,6 +29,7 @@ const options = {
         },
       });
     else {
+      time = 0;
       startBtn.removeAttribute('disabled');
     }
     time = selectedDates[0] - now;
